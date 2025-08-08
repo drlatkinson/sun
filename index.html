@@ -18,38 +18,55 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       background: rgba(255, 255, 255, 0.95);
-      padding: 20px;
-      border-radius: 10px;
+      padding: 24px 32px;
+      border-radius: 12px;
       z-index: 10;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      min-width: 260px;
+      max-width: 90vw;
     }
 
     #instructions {
       font-size: 16px;
-      margin-bottom: 16px;
+      margin-bottom: 24px;
       color: #000;
+      text-align: center;
     }
 
     /* Style the ARButton to match your design */
     a.webxr-ar-button {
-      display: inline-block;
       font-size: 18px !important;
-      padding: 12px 24px !important;
+      padding: 12px 32px !important;
       background: #000 !important;
       color: #fff !important;
       border: none !important;
-      border-radius: 6px !important;
+      border-radius: 8px !important;
       cursor: pointer !important;
-      margin-top: 16px;
+      margin: 0 auto;
       text-decoration: none !important;
+      display: inline-block !important;
+    }
+
+    /* Renderer canvas is hidden by default */
+    #ar-canvas {
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      display: none;
+      z-index: 1;
+      background: transparent;
     }
   </style>
 </head>
 <body>
 
-  <!-- Unified intro/splash with AR button inserted by JS -->
   <div id="intro">
     <div id="instructions">
       <strong>Welcome to Sun AR</strong><br>
@@ -59,6 +76,9 @@
     </div>
     <!-- ARButton will be appended here by JS -->
   </div>
+
+  <!-- Three.js canvas will be attached to this container -->
+  <div id="ar-canvas"></div>
 
   <script type="module" src="js/script.js"></script>
 </body>
