@@ -1,3 +1,20 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Markerless AR - Sun Animation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { margin: 0; overflow: hidden; }
+    #enter-ar { position: absolute; top: 50px; left: 50px; padding: 10px; background: #fff; z-index: 10; }
+  </style>
+</head>
+<body>
+  <button id="enter-ar">Enter AR</button>
+  <script type="module" src="js/script.js"></script>
+</body>
+</html> -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,11 +23,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body { margin: 0; overflow: hidden; }
-    #enter-ar { position: absolute; top: 10px; left: 10px; padding: 10px; background: #fff; z-index: 10; }
-  </style>
-</head>
-<body>
-  <button id="enter-ar">Enter AR</button>
+
+    /* You can style your explanatory text here */
+    #instructions {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      right: 20px;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.8);
+      font-family: sans-serif;
+      font-size: 16px;
+      z-index: 10;
+      border-radius: 8px;
+    }
+
+  <!-- ✅ Add your explanatory/instructional text here -->
+  <div id="instructions">
+    <strong>Welcome to Sun AR</strong><br>
+   Point your phone towards the centre of the room.<br>
+    The animation will appear in front of you.<br>.
+  </div>
+
+  <!-- ✅ This will start AR automatically if script is configured to do so -->
   <script type="module" src="js/script.js"></script>
+
 </body>
 </html>
