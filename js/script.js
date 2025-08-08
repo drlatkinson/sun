@@ -1,5 +1,5 @@
-import * as THREE from 'https://cdn.skypack.dev/three@0.150.1';
-import { ARButton } from '/-/three@v0.150.1-r75e9MvYwn7pBFuUt6Gu/dist=es2019,mode=raw/examples/jsm/webxr/ARButton.js';
+import * as THREE from 'https://unpkg.com/three@0.150.1/build/three.module.js';
+import { ARButton } from 'https://unpkg.com/three@0.150.1/examples/jsm/webxr/ARButton.js';
 
 let camera, scene, renderer;
 let animationFrames = [];
