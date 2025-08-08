@@ -31,7 +31,7 @@
       font-size: 16px;
       color: #000;
       text-align: center;
-
+    }
     a.webxr-ar-button {
       position: static !important;
       font-size: 18px !important;
@@ -50,12 +50,17 @@
       width: 100vw;
       height: 100vh;
       top: 0;
-      left: 50%;
+      left: 0;
       display: none;
       z-index: 1;
       background: transparent;
-    } */
-    
+    }
+    /* Add this for all images to prevent stretching */
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
   </style>
 </head>
 <body>
