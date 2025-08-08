@@ -33,7 +33,7 @@ function init() {
     const geometry = new THREE.PlaneGeometry(1, 1);
     const material = new THREE.MeshBasicMaterial({ transparent: true, opacity: 1 });
     plane = new THREE.Mesh(geometry, material);
-    plane.position.set(0, 0, -1.5); // 1.5 meters in front of camera
+    plane.position.set(0, 0, -3); // 3 meters in front of camera
     camera.add(plane);
     scene.add(camera);
 
