@@ -12,7 +12,6 @@
       background-color: #fff;
     }
 
-    /* Wrapper for instructions and AR button */
     #intro {
       position: absolute;
       top: 50%;
@@ -33,12 +32,11 @@
 
     #instructions {
       font-size: 16px;
-      margin-bottom: 24px;
+      margin-bottom: 0;
       color: #000;
       text-align: center;
     }
 
-    /* Style the ARButton to match your design */
     a.webxr-ar-button {
       font-size: 18px !important;
       padding: 12px 32px !important;
@@ -47,12 +45,11 @@
       border: none !important;
       border-radius: 8px !important;
       cursor: pointer !important;
-      margin: 0 auto;
+      margin-top: 80px !important; /* Make the button much lower */
       text-decoration: none !important;
       display: inline-block !important;
     }
 
-    /* Renderer canvas is hidden by default */
     #ar-canvas {
       position: absolute;
       width: 100vw;
