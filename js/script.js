@@ -3,9 +3,11 @@ import { ARButton } from 'https://cdn.jsdelivr.net/npm/three@0.150.1/examples/js
 
 let camera, scene, renderer;
 let animationFrames = [];
-let plane;
+let plane = null;
 let frameIndex = 0;
 let animationStarted = false;
+let framesLoaded = 0;
+const TOTAL_FRAMES = 28;
 
 const intro = document.getElementById('intro');
 const arCanvasContainer = document.getElementById('ar-canvas');
@@ -22,25 +24,30 @@ function init() {
   renderer.xr.enabled = true;
   renderer.domElement.style.width = '100vw';
   renderer.domElement.style.height = '100vh';
-  renderer.domElement.style.display = 'none'; // Hide renderer by default
+  renderer.domElement.style.display = 'none';
   arCanvasContainer.appendChild(renderer.domElement);
 
-  // Load animation frames for the sun
+  // Load all frames, but wait for the first to get aspect
   const loader = new THREE.TextureLoader();
-  for (let i = 1; i <= 28; i++) {
+
+  for (let i = 1; i <= TOTAL_FRAMES; i++) {
     const frameNum = String(i).padStart(4, '0');
     loader.load(`assets/sun${frameNum}.png`, texture => {
       animationFrames[i - 1] = texture;
+      framesLoaded++;
+
+      // When the first frame loads, create the plane with correct aspect ratio
+      if (!plane && texture.image && texture.image.width && texture.image.height) {
+        const aspect = texture.image.width / texture.image.height;
+        const geometry = new THREE.PlaneGeometry(aspect, 1);
+        const material = new THREE.MeshBasicMaterial({ transparent: true });
+        plane = new THREE.Mesh(geometry, material);
+        plane.position.set(0, 0, -2.5);
+        camera.add(plane);
+        scene.add(camera);
+      }
     });
   }
-
-  // Set up animated sun plane
-  const geometry = new THREE.PlaneGeometry(1, 1);
-  const material = new THREE.MeshBasicMaterial({ transparent: true });
-  plane = new THREE.Mesh(geometry, material);
-  plane.position.set(0, 0, -2.5);
-  camera.add(plane);
-  scene.add(camera);
 
   // Create the ARButton and add it inside the intro splash
   const arButton = ARButton.createButton(renderer, { requiredFeatures: ['hit-test'] });
@@ -61,16 +68,26 @@ function init() {
   renderer.xr.addEventListener('sessionend', () => {
     intro.style.display = 'flex';
     renderer.domElement.style.display = 'none';
-    animationStarted = false; // will restart animation next time
-    renderer.setAnimationLoop(null); // Stop the animation loop
+    animationStarted = false;
+    renderer.setAnimationLoop(null);
   });
+
+  // Handle window resize
+  window.addEventListener('resize', onWindowResize, false);
+}
+
+function onWindowResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
 function animate() {
   renderer.setAnimationLoop(() => {
     if (
       renderer.domElement.style.display !== 'none' && // Only animate if AR is showing
-      animationFrames.length > 0 &&
+      animationFrames.length === TOTAL_FRAMES &&
+      plane &&
       plane.material
     ) {
       plane.material.map = animationFrames[frameIndex];
