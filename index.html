@@ -12,17 +12,18 @@
       background-color: #fff;
     }
 
-    /* Wrapper for instructions and button */
+    /* Wrapper for instructions and Start AR button */
     #intro {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       text-align: center;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.95);
       padding: 20px;
       border-radius: 10px;
       z-index: 10;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
     #instructions {
@@ -33,22 +34,18 @@
 
     #start-ar {
       font-size: 18px;
-      padding: 12px 20px;
+      padding: 12px 24px;
       background: #000;
       color: #fff;
       border: none;
       border-radius: 6px;
       cursor: pointer;
     }
-
-    .hidden {
-      display: none;
-    }
   </style>
 </head>
 <body>
 
-  <!-- ✅ Instructional text and start button -->
+  <!-- ✅ Instructions and Start AR button -->
   <div id="intro">
     <div id="instructions">
       <strong>Welcome to Sun AR</strong><br>
@@ -58,3 +55,9 @@
     </div>
     <button id="start-ar">Start AR</button>
   </div>
+
+  <!-- ✅ Load your AR script -->
+  <script type="module" src="js/script.js"></script>
+
+</body>
+</html> 
