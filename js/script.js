@@ -7,13 +7,9 @@ let plane;
 let frameIndex = 0;
 
 const intro = document.getElementById('intro');
-const startButton = document.getElementById('start-ar');
 
-startButton.addEventListener('click', () => {
-  intro.style.display = 'none';
-  init();
-  animate();
-});
+init();
+animate();
 
 function init() {
   scene = new THREE.Scene();
@@ -25,6 +21,7 @@ function init() {
   renderer.xr.enabled = true;
   document.body.appendChild(renderer.domElement);
 
+  // Load animation frames for the sun
   const loader = new THREE.TextureLoader();
   for (let i = 1; i <= 28; i++) {
     const frameNum = String(i).padStart(4, '0');
@@ -33,6 +30,7 @@ function init() {
     });
   }
 
+  // Set up animated sun plane
   const geometry = new THREE.PlaneGeometry(1, 1);
   const material = new THREE.MeshBasicMaterial({ transparent: true });
   plane = new THREE.Mesh(geometry, material);
@@ -40,7 +38,19 @@ function init() {
   camera.add(plane);
   scene.add(camera);
 
-  document.body.appendChild(ARButton.createButton(renderer, { requiredFeatures: ['hit-test'] }));
+  // Create the ARButton and add it inside the intro splash
+  const arButton = ARButton.createButton(renderer, { requiredFeatures: ['hit-test'] });
+
+  // Optionally, change ARButton text to match your splash
+  arButton.textContent = "Start AR Experience";
+
+  // Move ARButton inside #intro and style
+  intro.appendChild(arButton);
+
+  // Hide intro when AR session starts
+  renderer.xr.addEventListener('sessionstart', () => {
+    intro.style.display = 'none';
+  });
 }
 
 function animate() {
@@ -50,7 +60,6 @@ function animate() {
       plane.material.needsUpdate = true;
       frameIndex = (frameIndex + 1) % animationFrames.length;
     }
-
     renderer.render(scene, camera);
   });
 }
