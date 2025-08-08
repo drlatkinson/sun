@@ -11,7 +11,6 @@
       font-family: sans-serif;
       background-color: #fff;
     }
-
     #intro {
       position: absolute;
       top: 50%;
@@ -29,15 +28,14 @@
       min-width: 260px;
       max-width: 90vw;
     }
-
     #instructions {
       font-size: 16px;
       color: #000;
       text-align: center;
     }
-
-    /* Style the ARButton to match your design and be lower */
+    /* ARButton styling: make it static and spaced from the text */
     a.webxr-ar-button {
+      position: static !important;
       font-size: 18px !important;
       padding: 12px 32px !important;
       background: #000 !important;
@@ -45,11 +43,10 @@
       border: none !important;
       border-radius: 8px !important;
       cursor: pointer !important;
-      margin-top: 80px !important; /* Make the button much lower */
+      margin-top: 80px !important;
       text-decoration: none !important;
       display: inline-block !important;
     }
-
     #ar-canvas {
       position: absolute;
       width: 100vw;
@@ -63,7 +60,6 @@
   </style>
 </head>
 <body>
-
   <div id="intro">
     <div id="instructions">
       <strong>Welcome to Sun AR</strong><br>
@@ -73,9 +69,7 @@
     </div>
     <!-- ARButton will be appended here by JS -->
   </div>
-
   <div id="ar-canvas"></div>
-
   <script type="module" src="js/script.js"></script>
 </body>
 </html>
