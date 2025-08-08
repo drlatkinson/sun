@@ -5,11 +5,12 @@ let camera, scene, renderer;
 let animationFrames = [];
 let plane;
 let frameIndex = 0;
+let animationStarted = false;
 
 const intro = document.getElementById('intro');
+const arCanvasContainer = document.getElementById('ar-canvas');
 
 init();
-animate();
 
 function init() {
   scene = new THREE.Scene();
@@ -19,7 +20,10 @@ function init() {
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.xr.enabled = true;
-  document.body.appendChild(renderer.domElement);
+  renderer.domElement.style.width = '100vw';
+  renderer.domElement.style.height = '100vh';
+  renderer.domElement.style.display = 'none'; // Hide renderer by default
+  arCanvasContainer.appendChild(renderer.domElement);
 
   // Load animation frames for the sun
   const loader = new THREE.TextureLoader();
@@ -40,22 +44,35 @@ function init() {
 
   // Create the ARButton and add it inside the intro splash
   const arButton = ARButton.createButton(renderer, { requiredFeatures: ['hit-test'] });
-
-  // Optionally, change ARButton text to match your splash
   arButton.textContent = "Start AR Experience";
-
-  // Move ARButton inside #intro and style
   intro.appendChild(arButton);
 
-  // Hide intro when AR session starts
+  // Hide intro, show AR and start animation only when AR session starts
   renderer.xr.addEventListener('sessionstart', () => {
     intro.style.display = 'none';
+    renderer.domElement.style.display = 'block';
+    if (!animationStarted) {
+      animationStarted = true;
+      animate();
+    }
+  });
+
+  // Optionally, if AR session ends, bring back the intro and hide animation
+  renderer.xr.addEventListener('sessionend', () => {
+    intro.style.display = 'flex';
+    renderer.domElement.style.display = 'none';
+    animationStarted = false; // will restart animation next time
+    renderer.setAnimationLoop(null); // Stop the animation loop
   });
 }
 
 function animate() {
   renderer.setAnimationLoop(() => {
-    if (animationFrames.length > 0 && plane.material) {
+    if (
+      renderer.domElement.style.display !== 'none' && // Only animate if AR is showing
+      animationFrames.length > 0 &&
+      plane.material
+    ) {
       plane.material.map = animationFrames[frameIndex];
       plane.material.needsUpdate = true;
       frameIndex = (frameIndex + 1) % animationFrames.length;
