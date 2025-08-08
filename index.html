@@ -5,30 +5,56 @@
   <title>Markerless AR - Sun Animation</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { margin: 0; overflow: hidden; }
-
-    #instructions {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      right: 20px;
-      padding: 15px;
-      background: rgba(255, 255, 255, 0.8);
+    body {
+      margin: 0;
+      overflow: hidden;
       font-family: sans-serif;
-      font-size: 16px;
-      z-index: 10;
-      border-radius: 8px;
+      background-color: #fff;
     }
 
-  <!-- Explanatory/instructional text -->
-  <div id="instructions">
-    <strong>Welcome to Sun AR</strong><br>
-   Point your phone towards the centre of the room.<br>
-    The animation will appear in front of you.<br>.
+    /* Wrapper for instructions and button */
+    #intro {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+      z-index: 10;
+    }
+
+    #instructions {
+      font-size: 16px;
+      margin-bottom: 16px;
+      color: #000;
+    }
+
+    #start-ar {
+      font-size: 18px;
+      padding: 12px 20px;
+      background: #000;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ✅ Instructional text and start button -->
+  <div id="intro">
+    <div id="instructions">
+      <strong>Welcome to Sun AR</strong><br>
+      Move your phone slowly to scan the space.<br>
+      The animation will appear in front of you.<br>
+      Works best on Safari (iOS 16+) or Chrome (Android).
+    </div>
+    <button id="start-ar">Start AR</button>
   </div>
-
-  <!-- This will start AR automatically if script is configured to do so -->
-  <script type="module" src="js/script.js"></script>
-
-</body>
-</html>
