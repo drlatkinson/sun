@@ -38,7 +38,7 @@ function init() {
   const geometry = new THREE.PlaneGeometry(1, 1);
   const material = new THREE.MeshBasicMaterial({ transparent: true });
   plane = new THREE.Mesh(geometry, material);
-  plane.position.set(0.25, 0, -2.5);
+  plane.position.set(0.1, 0, -2.5);
   camera.add(plane);
   scene.add(camera);
 
