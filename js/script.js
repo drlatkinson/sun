@@ -7,7 +7,7 @@ let plane = null;
 let frameIndex = 0;
 let animationStarted = false;
 let framesLoaded = 0;
-const TOTAL_FRAMES = 28;
+const TOTAL_FRAMES = 120;
 
 const intro = document.getElementById('intro');
 const arCanvasContainer = document.getElementById('ar-canvas');
