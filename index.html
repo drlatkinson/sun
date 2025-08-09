@@ -32,7 +32,9 @@
       color: #000;
       text-align: center;
     }
-    a.webxr-ar-button {
+    
+ 
+/*  a.webxr-ar-button {    
       position: static !important;
       font-size: 18px !important;
       padding: 12px 32px !important;
@@ -44,7 +46,24 @@
       margin-top: 200px !important;
       text-decoration: none !important;
       display: inline-block !important;
+    } */
+
+    
+    a.webxr-ar-button {
+    position: relative !important; /* or absolute/fixed if you want to place it somewhere else */
+    z-index: 30 !important;
+    font-size: 18px !important;
+    padding: 12px 32px !important;
+    background: #000 !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    margin-top: 200px !important;
+    text-decoration: none !important;
+    display: inline-block !important;
     }
+    
     #ar-canvas {
       position: absolute;
       width: 100vw;
