@@ -57,7 +57,7 @@ function init() {
     if (texture.image && texture.image.width && texture.image.height) {
       const aspect = texture.image.width / texture.image.height;
       // Static overlay plane size, adjust as needed
-      const geometry = new THREE.PlaneGeometry(aspect * 1, 1);
+      const geometry = new THREE.PlaneGeometry(aspect * 1.2, 1.2);
       const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true });
       staticPlane = new THREE.Mesh(geometry, material);
       staticPlane.position.set(0, 0, -3.3); // Closer to camera than the animation plane at -3.5
