@@ -153,7 +153,7 @@ function init() {
   }
 
   // Load the static overlay image ONCE, and put closer to the camera than the animated plane
-  loader.load('assets/static-overlay.png', texture => {
+  loader.load('assets/gate3.png', texture => {
     if (texture.image && texture.image.width && texture.image.height) {
       const aspect = texture.image.width / texture.image.height;
       // Static overlay plane size, adjust as needed
