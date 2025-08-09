@@ -29,6 +29,41 @@ function init() {
   renderer.domElement.style.display = 'none';
   arCanvasContainer.appendChild(renderer.domElement);
 
+  // ====== Place your MediaRecorder code here =======
+let mediaRecorder;
+let recordedChunks = [];
+
+const recordBtn = document.getElementById('record-btn');
+const downloadLink = document.getElementById('download-link');
+const canvas = renderer.domElement;
+
+recordBtn.addEventListener('click', function() {
+  if (mediaRecorder && mediaRecorder.state === "recording") {
+    // Stop recording
+    mediaRecorder.stop();
+    recordBtn.textContent = "Start Recording";
+  } else {
+    // Start recording
+    recordedChunks = [];
+    const stream = canvas.captureStream(30); // 30 FPS
+    mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
+    mediaRecorder.ondataavailable = function(e) {
+      if (e.data.size > 0) recordedChunks.push(e.data);
+    };
+    mediaRecorder.onstop = function() {
+      const blob = new Blob(recordedChunks, { type: 'video/webm' });
+      downloadLink.href = URL.createObjectURL(blob);
+      downloadLink.download = 'ar-experience.webm';
+      downloadLink.style.display = 'block';
+      downloadLink.textContent = 'Download Video';
+    };
+    mediaRecorder.start();
+    recordBtn.textContent = "Stop Recording";
+    downloadLink.style.display = 'none';
+  }
+});
+// ====== End MediaRecorder code =======
+
   // Texture loader instance for both animation and static overlay
   const loader = new THREE.TextureLoader();
 
