@@ -29,7 +29,7 @@ function init() {
   renderer.domElement.style.display = 'none';
   arCanvasContainer.appendChild(renderer.domElement);
 
-  // ====== Place your MediaRecorder code here =======
+/*
 let mediaRecorder;
 let recordedChunks = [];
 
@@ -61,8 +61,8 @@ recordBtn.addEventListener('click', function() {
     recordBtn.textContent = "Stop Recording";
     downloadLink.style.display = 'none';
   }
-});
-// ====== End MediaRecorder code =======
+}); 
+*/
 
   // Texture loader instance for both animation and static overlay
   const loader = new THREE.TextureLoader();
